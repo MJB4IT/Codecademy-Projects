@@ -61,19 +61,15 @@ deaths = [90, 4000, 16, 3103, 179, 184, 408, 682, 5, 1023, 43, 319, 688, 259, 37
 # 1
 updated_damages = []
 
-
 def modify_damages():
     for d in damages:
-        if d == "Damages not recorded":
-            updated_damages.append(d)
+        if "M" in d:
+            updated_damages.append(float(d[:-1]) * conversion["M"])
+        elif "B" in d:
+            updated_damages.append(float(d[:-1]) * conversion["B"])
         else:
-            if "M" in d:
-                updated_damages.append(float(d[:-1]) * conversion["M"])
-            else:
-                updated_damages.append(float(d[:-1]) * conversion["B"])
-
-    print(updated_damages)
-
+            updated_damages.append(d)
+    return updated_damages
 
 # Update Recorded Damages
 conversion = {"M": 1000000,
